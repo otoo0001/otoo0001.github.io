@@ -1,0 +1,82 @@
+media:
+  input: images
+  output: /images
+  rename: safe
+  categories: [image]
+
+content:
+  - name: website
+    label: Website content
+    type: file
+    path: data/content.json
+    format: json
+    fields:
+      - name: site
+        label: Profile and homepage
+        type: object
+        fields:
+          - { name: name, label: Name, type: string, required: true }
+          - { name: shortTitle, label: Browser title, type: string, required: true }
+          - { name: role, label: Professional title, type: string, required: true }
+          - { name: intro, label: Introduction, type: text, required: true }
+          - { name: affiliation, label: Affiliation, type: string }
+          - { name: location, label: Location, type: string }
+          - { name: email, label: Email, type: string }
+          - { name: orcid, label: ORCID link, type: string }
+          - { name: github, label: GitHub link, type: string }
+          - name: profileImage
+            label: Profile picture
+            type: image
+            options: { path: profile }
+          - { name: blogTitle, label: Blog heading, type: string }
+          - { name: blogIntro, label: Blog introduction, type: text }
+
+      - name: publications
+        label: Publications
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{year}: {title}" }
+        fields:
+          - { name: year, label: Year, type: string, required: true }
+          - { name: type, label: Publication type, type: string }
+          - { name: title, label: Title, type: text, required: true }
+          - { name: authors, label: Authors, type: text }
+          - { name: venue, label: Journal and citation, type: text }
+          - { name: url, label: DOI or publication link, type: string }
+
+      - name: conferences
+        label: Conferences
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{year}: {title}" }
+        fields:
+          - { name: year, label: Year, type: string, required: true }
+          - { name: event, label: Conference, type: string }
+          - { name: title, label: Presentation title, type: text, required: true }
+          - { name: url, label: Abstract or DOI link, type: string }
+
+      - name: experience
+        label: Experience
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{role}" }
+        fields:
+          - { name: period, label: Period, type: string }
+          - { name: role, label: Role, type: string, required: true }
+          - { name: place, label: Institution or project, type: string }
+          - { name: text, label: Description, type: text }
+
+      - name: posts
+        label: Blog posts
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{date}: {title}" }
+        fields:
+          - { name: title, label: Title, type: string, required: true }
+          - { name: date, label: Date, type: date, required: true }
+          - name: image
+            label: Cover image
+            type: image
+            options: { path: blog }
+          - { name: body, label: Post, type: text, required: true }
+          - { name: published, label: Published, type: boolean, default: true }
